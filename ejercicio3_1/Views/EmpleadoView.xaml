@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ejercicio3_1.Views.EmpleadoView"
+             
+             xmlns:vm="clr-namespace:ejercicio3_1.ViewModels"
+             xmlns:Converter="clr-namespace:ejercicio3_1.Converters">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converter:ByteArrayToImage x:Key="ByteToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.BindingContext>
+        <vm:EmpleadoViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+
+        <Label Text="Nombre del empleado"/>
+        <Entry Text="{Binding Nombre}"/>
+
+        <Label Text="Apellidos del empleado"/>
+        <Entry Text="{Binding Apellidos}"/>
+
+        <Label Text="Edad del empleado"/>
+        <Entry Text="{Binding Edad}" Keyboard="Numeric"/>
+
+        <Label Text="Dirección del empleado"/>
+        <Entry Text="{Binding Direccion}"/>
+
+        <Label Text="Puesto del empleado"/>
+        <Entry Text="{Binding Puesto}"/>
+
+        <Label Text="Foto del empleado"/>
+        <Image Source="{Binding Foto, Converter={StaticResource ByteToImage}}" WidthRequest="200" HeightRequest="200" BackgroundColor="LightGray">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding TomarFotoCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
+
+        <Button IsVisible="{Binding btncrearIsVisible}" Text="Crear Empleado" Command="{Binding CrearCommand}"/>
+        <Button IsVisible="{Binding btnactualizarIsVisible}" Text="Actualizar Empleado" Command="{Binding ActualizarCommand}"/>
+        <Button IsVisible="{Binding btneliminarIsVisible}" Text="Eliminar Empleado" Command="{Binding EliminarCommand}"/>
+
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ejercicio3_1.Views.ListEmpleadoView" 
+             xmlns:local="clr-namespace:ejercicio3_1.Views">
+
+    <ContentPage.Content>
+        
+        <StackLayout Margin="10">
+            <Button Text="Ver Detalles"
+                    Command="{Binding GoToDetailsCommand}"
+                    CommandParameter="{x:Type local:EmpleadoView}"/>
+
+            <ListView ItemsSource="{Binding Empleados}"
+                      SelectedItem="{Binding SelectedEmpleado}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Nombre}"
+                                  Detail="{Binding Apellidos}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button Text="Agregar Empleado"
+                    Command="{Binding CrearEmpleadoCommand}"
+                    CommandParameter="{x:Type local:EmpleadoView}"/>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>
